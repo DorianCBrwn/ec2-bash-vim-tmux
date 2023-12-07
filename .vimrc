@@ -1,27 +1,27 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'Chiel92/vim-autoformat'
-Plug 'tmhedberg/SimpylFold'
-Plug 'preservim/nerdtree'
 Plug 'itchyny/lightline.vim'
-Plug 'zxqfl/tabnine-vim'
-Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'nathanaelkane/vim-indent-guides'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'jiangmiao/auto-pairs'
 Plug 'machakann/vim-highlightedyank'
-Plug 'morhetz/gruvbox'
+Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'markvincze/panda-vim'
+Plug 'psf/black', { 'branch': 'stable' }
+Plug 'scrooloose/nerdtree'
+Plug ''leshill/vim-json'
+
+
 
 call plug#end()
 
-set shell=/bin/zsh
+set shell=/bin/bash
 
 " Setting the leader
-let mapleader="\<Space>"
-
-" Easier writing/quitting
-nnoremap <Leader>w :w<CR>
-nnoremap <Leader>x :x<CR>
-nnoremap <Leader>q :q<CR>
+let mapleader=","
+noremap <leader>, ,
 
 " set the clipboard
 set clipboard=unnamed
@@ -31,7 +31,10 @@ vnoremap <Leader>y "+y
 
 " Code formatting with black
 " Apply formatter on save
-au BufWrite * :Autoformat
+augroup black_on_save
+  autocmd!
+  autocmd BufWritePre *.py Black
+augroup end
 
 " Disable fallback to vim's indent file, retabbing and removing trailing whitespace
 let g:autoformat_autoindent = 0
@@ -60,7 +63,7 @@ map <C-l> <C-W>l
 :augroup END
 
 " Searching within a file
-set hlsearch  " highlight search results 
+set hlsearch  " highlight search results
 set incsearch " show search results as you type
 nnoremap <silent> <CR> :nohlsearch<Bar>:echo<CR> " Clear search results with enter
 
@@ -69,22 +72,28 @@ map <C-n> :NERDTreeToggle<CR>
 
 
 " Tab spacing
-set tabstop=4 
-set softtabstop=4 
+set tabstop=4
 set shiftwidth=4
-set smarttab
-set expandtab                            
-
+set softtabstop=4
+set expandtab " use spaces instead of tabs.
+set smarttab " let's tab key insert 'tab stops', and bksp deletes tabs.
+set shiftround " tab / shifting moves to closest tabstop.
+set autoindent " Match indents on new lines.
+set smartindent " Intellegently dedent / indent new lines based on rules.
 " Color
-let g:gruvbox_contrast_dark = 'hard'
+color panda
 if exists('+termguicolors')
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
-let g:gruvbox_invert_selection='0'
 syntax enable
-silent! colorscheme gruvbox
 set background=dark
+
+" Language Specific
+" Python
+" Yaml
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
 
 " Additional vim options
 set encoding=utf-8                       " Set encoding
@@ -95,3 +104,23 @@ set nowrap                               " Turn off text wrapping
 set colorcolumn=88                       " Column number for vertical line
 set cursorline                           " Highlight the line of the cursor
 set t_Co=256                             " Required for vim colorscheme show up in tmux
+" We have VCS -- we don't need this stuff.
+set nobackup " We have vcs, we don't need backups.
+set nowritebackup " We have vcs, we don't need backups.
+set noswapfile " They're just annoying. Who likes them?
+" don't nag me when hiding buffers
+set hidden " allow me to have buffers with unsaved changes.
+set autoread " when a file has changed on disk, just load it. Don't ask.
+" Make search more sane
+set ignorecase " case insensitive search
+set smartcase " If there are uppercase letters, become case-sensitive.
+set incsearch " live incremental searching
+set showmatch " live match highlighting
+set hlsearch " highlight matches
+set gdefault " use the `g` flag by default.
+" allow the cursor to go anywhere in visual block mode.
+set virtualedit+=block
+
+" Keybindings
+" So we don't have to reach for escape to leave insert mode.
+inoremap jf <esc>
