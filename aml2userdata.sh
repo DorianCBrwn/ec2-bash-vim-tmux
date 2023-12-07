@@ -1,10 +1,12 @@
 #!/bin/bash
-# Setting up an Amazon Linux 2 Instance with the Deep Learning AMI
+# Setting up an Amazon Linux 2 Instance with the Ubuntu AMI
 set -e -x
 
 get_dotfiles () {
 
     echo "(1/4): GETTING DOTFILES..."
+    #Install git
+    sudo yum -y install git
     local DIR=/home/ec2-user
     git clone https://github.com/DorianCBrwn/ec2-bash-vim-tmux $DIR/dotfiles
     ln -s $DIR/dotfiles/.tmux.conf $DIR/.tmux.conf
@@ -33,8 +35,9 @@ setup_tmux () {
 
     echo "(3/4) SETTING UP TMUX..."
     # Install tmux dependencies
-    yum -y install ncurses-devel
-    yum -y install libevent-devel
+    sudo yum -y update
+    sudo yum -y install tmux
+
 
     # Get the latest version
     git clone https://github.com/tmux/tmux.git
@@ -45,8 +48,9 @@ setup_tmux () {
     # Get a simple startup script
     mv /home/ec2-user/dotfiles/stm.sh /bin/stm
     chmod +x /bin/stm
+
     # Install htop
-    yum -y install htop
+    sudo yum -y install htop
 }
 
 setup_bash () {
