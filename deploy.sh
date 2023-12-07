@@ -1,8 +1,8 @@
 #!/bin/bash -ex
 
 STACK_NAME=${1:-devOps-env}
-REGION=${2:-ap-northeast-1}
-PROFILE=${3:-default}
+REGION=${2:-us-east-1}
+PROFILE=${3:-iamadmin-general}
 
 deploy () {
 
@@ -10,9 +10,9 @@ deploy () {
 
   ${CMD} deploy \
   --stack-name ${STACK_NAME} \
-  --template-file ./templates/ec2-ubuntu.yml \
+  --template-file ./templates/ec2.yml \
   --parameter-overrides $(cat config/deploy.ini) \
-  --capabilities CAPABILITY_NAMED_IAM CAPABILITY_IAM CAPABILITY_AUTO_EXPAND
+  # --capabilities CAPABILITY_NAMED_IAM CAPABILITY_IAM CAPABILITY_AUTO_EXPAND
 }
 
 deploy
