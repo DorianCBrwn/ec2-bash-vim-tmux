@@ -9,6 +9,7 @@ get_dotfiles () {
     git clone https://github.com/DorianCBrwn/ec2-bash-vim-tmux $DIR/dotfiles
     ln -s $DIR/dotfiles/.tmux.conf $DIR/.tmux.conf
     ln -s $DIR/dotfiles/.vimrc $DIR/.vimrc
+    ln -s $DIR/dotfiles/.trueline-settings $DIR/.trueline-settings
     chown -R ec2-user:ec2-user $DIR/dotfiles $DIR/.vimrc $DIR/.tmux.conf
 
 }
@@ -53,18 +54,21 @@ setup_bash () {
     echo "(4/4) SETTING UP Bash Environment..."
     local DIR=/home/ec2-user
     # Install nerd fonts
+    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/CascadiaCode.zip
+    # Check if fonts directory exists install to local if not
+    if [ ! -d "$DIR/.local/share/fonts" ]; then
+        unzip CascadiaCode.zip -d ~/.fonts
+        else
+        unzip CascadiaCode.zip -d ~/.local/share/fonts
+    fi
+    fc-cache -fv
 
-    # Install oh-my-zsh
-    wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O $DIR/install.sh
-    chown -R ec2-user:ec2-user $DIR/install.sh
-    cd $DIR
-    echo pwd
-    runuser -l ec2-user 'install.sh'
-    # Change the default shell to zsh
-    yum -y install util-linux-user
-    chsh -s /bin/zsh ec2-user
-    # Add conda to end of zshrc
-    echo "source ~/.dlamirc" >> $DIR/.zshrc
+    # Install trueline prompt
+    wget https://raw.githubusercontent.com/petobens/trueline/master/trueline.sh -P ~/
+    # Get settings from trueline-settings file and append to bashrc
+    # cat $DIR/.trueline-settings >> ~/.bashrc
+    echo 'source ~/trueline.sh' >> ~/.bashrc
+    source ~/.bashrc
 
 }
 

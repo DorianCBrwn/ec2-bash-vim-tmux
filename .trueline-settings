@@ -1,0 +1,13 @@
+declare -A TRUELINE_COLORS=(
+    [black]='36;39;46'
+    [cursor_grey]='40;44;52'
+    [green]='152;195;121'
+    [grey]='171;178;191'
+    [light_blue]='97;175;239'
+    [mono]='130;137;151'
+    [orange]='209;154;102'
+    [purple]='198;120;221'
+    [red]='224;108;117'
+    [special_grey]='59;64;72'
+    [white]='208;208;208'
+)
