@@ -8,7 +8,7 @@ Parameters:
     Default: "https://raw.githubusercontent.com/DorianCBrwn/ec2-bash-vim-tmux/main/aml2userdata.sh"
   SecurityGroups:
     Type: CommaDelimitedList
-    Default: sg-07489053414ce4490, sg-sg-0438777fd2027216f
+    Default: sg-07489053414ce4490,
   Region:
     Type: String
     Default: us-east-1
@@ -19,12 +19,12 @@ Parameters:
     Type: String
     Default: t2.micro
   KeyName:
-    Type: CommaDelimitedList
-    Default: general-ec2, docker-keys
+    Type: String
+    Default: general-ec2
 Mappings:
   RegionMap:
     us-east-1:
-      AMI: ami-0f840415174c4a8e0
+      AMI: ami-0fc5d935ebf8bc3b
     # us-east-2:
     #   AMI: ami-0a714e270d06489a9
     # us-west-1:
@@ -86,7 +86,7 @@ Resources:
 
 Outputs:
   MyEC2InstanceSSH:
-    Value: !Sub "ssh -i <YOUR PATH TO PEM FILE>/${KeyName}.pem ec2-user@${MyEC2Instance.PublicIp}"
+    Value: !Sub "ssh -i ~/.ssh/${KeyName}.pem ec2-user@${MyEC2Instance.PublicIp}"
   MyEC2InstancePublicIP:
     Value: !GetAtt MyEC2Instance.PublicIp
   MyEC2InstancePrivateIP:

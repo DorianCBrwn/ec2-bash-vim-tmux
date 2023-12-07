@@ -6,7 +6,7 @@ get_dotfiles () {
 
     echo "(1/4): GETTING DOTFILES..."
     local DIR=/home/ec2-user
-    git clone https://github.com/aws-samples/ec2-data-science-vim-tmux-zsh.git $DIR/dotfiles
+    git clone https://github.com/DorianCBrwn/ec2-bash-vim-tmux $DIR/dotfiles
     ln -s $DIR/dotfiles/.tmux.conf $DIR/.tmux.conf
     ln -s $DIR/dotfiles/.vimrc $DIR/.vimrc
     chown -R ec2-user:ec2-user $DIR/dotfiles $DIR/.vimrc $DIR/.tmux.conf
@@ -18,7 +18,6 @@ setup_vim () {
     echo "(2/4) SETTING UP VIM..."
     local DIR=/home/ec2-user
     # Install black for formatting
-    pip3 install black
 
     # Install vim plug for package management
     curl -fLo $DIR/.vim/autoload/plug.vim --create-dirs \
@@ -43,17 +42,18 @@ setup_tmux () {
     ./configure && make install
     cd ..
     # Get a simple startup script
-    mv /home/ec2-user/dotfiles/stm.sh /bin/stm 
+    mv /home/ec2-user/dotfiles/stm.sh /bin/stm
     chmod +x /bin/stm
     # Install htop
     yum -y install htop
 }
 
-setup_zsh () {
+setup_bash () {
 
-    echo "(4/4) SETTING UP ZSH..."
+    echo "(4/4) SETTING UP Bash Environment..."
     local DIR=/home/ec2-user
-    yum -y update && yum -y install zsh
+    # Install nerd fonts
+
     # Install oh-my-zsh
     wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O $DIR/install.sh
     chown -R ec2-user:ec2-user $DIR/install.sh
@@ -71,4 +71,4 @@ setup_zsh () {
 get_dotfiles
 setup_vim
 setup_tmux
-setup_zsh
+setup_bash
