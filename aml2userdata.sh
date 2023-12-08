@@ -27,7 +27,7 @@ setup_tmux () {
 
     echo "(3/4) SETTING UP TMUX..."
     # Install tmux dependencies
-    sudo yum install tmux
+    sudo yum -y install tmux
     # Get a simple startup script
     mv /home/ec2-user/dotfiles/stm.sh /bin/stm
     chmod +x /bin/stm
@@ -48,6 +48,8 @@ setup_bash () {
         else
         unzip CascadiaCode.zip -d ~/.local/share/fonts
     fi
+    sudo yum -y install fontconfig
+
     fc-cache -fv
 
     # # Install trueline prompt
@@ -60,7 +62,7 @@ setup_bash () {
     # Install Oh My Bash
     bash -c "$(wget https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh -O -)"
     # Change theme to powerline-multiline
-    sed -i 's/OSH_THEME=.*/OSH_THEME="powerline-multiline"/g' ~/.bashrc
+    sed -i 's/OSH_THEME=.*/OSH_THEME="powerline-multiline"/g' /home/ec2-user/.bashrc
 
 }
 

@@ -20,10 +20,11 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'machakann/vim-highlightedyank'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'sainnhe/sonokai'
+Plug 'markvincze/panda-vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'psf/black', { 'branch': 'stable' }
 Plug 'scrooloose/nerdtree'
-Plug ''leshill/vim-json'
+Plug 'leshill/vim-json'
 
 call plug#end()
 
