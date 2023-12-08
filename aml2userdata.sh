@@ -20,14 +20,6 @@ setup_vim () {
 
     echo "(2/4) SETTING UP VIM..."
     local DIR=/home/ec2-user
-    # Install black for formatting
-
-    # Install vim plug for package management
-    curl -fLo $DIR/.vim/autoload/plug.vim --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    chown -R ec2-user:ec2-user $DIR/.vim
-    # Install packages
-    runuser -l ec2-user -c 'vim +PlugInstall +qall'
 
 }
 
@@ -35,16 +27,7 @@ setup_tmux () {
 
     echo "(3/4) SETTING UP TMUX..."
     # Install tmux dependencies
-    sudo yum -y update
-    sudo yum -y install tmux
-
-
-    # Get the latest version
-    git clone https://github.com/tmux/tmux.git
-    cd tmux
-    sh autogen.sh
-    ./configure && make install
-    cd ..
+    sudo yum install tmux
     # Get a simple startup script
     mv /home/ec2-user/dotfiles/stm.sh /bin/stm
     chmod +x /bin/stm
