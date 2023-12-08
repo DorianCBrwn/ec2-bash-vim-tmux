@@ -60,8 +60,10 @@ setup_bash () {
     # source ~/.bashrc
 
     # Install Oh My Bash
-    bash -c "$(wget https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh -O -)"
+    bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)" --prefix=/usr/local --unattended
+
     # Change theme to powerline-multiline
+    cp /usr/local/share/oh-my-bash/bashrc home/ec2-user/.bashrc
     sed -i 's/OSH_THEME=.*/OSH_THEME="powerline-multiline"/g' /home/ec2-user/.bashrc
 
 }
