@@ -67,12 +67,17 @@ setup_bash () {
     fi
     fc-cache -fv
 
-    # Install trueline prompt
-    wget https://raw.githubusercontent.com/petobens/trueline/master/trueline.sh -P ~/
-    # Get settings from trueline-settings file and append to bashrc
-    # cat $DIR/.trueline-settings >> ~/.bashrc
-    echo 'source ~/trueline.sh' >> ~/.bashrc
-    source ~/.bashrc
+    # # Install trueline prompt
+    # wget https://raw.githubusercontent.com/petobens/trueline/master/trueline.sh -P ~/
+    # # Get settings from trueline-settings file and append to bashrc
+    # # cat $DIR/.trueline-settings >> ~/.bashrc
+    # echo 'source ~/trueline.sh' >> ~/.bashrc
+    # source ~/.bashrc
+
+    # Install Oh My Bash
+    bash -c "$(wget https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh -O -)"
+    # Change theme to powerline-multiline
+    sed -i 's/OSH_THEME=.*/OSH_THEME="powerline-multiline"/g' ~/.bashrc
 
 }
 
