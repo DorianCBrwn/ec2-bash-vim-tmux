@@ -102,6 +102,9 @@ let g:sonokai_better_performance = 1
 
 colorscheme sonokai
 
+let g:lightline = {}
+let g:lightline.colorscheme = 'sonokai'
+
 syntax enable
 set background=dark
 
