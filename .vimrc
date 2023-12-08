@@ -1,3 +1,13 @@
+" Install vim-plug if not found
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+endif
+
+" Run PlugInstall if there are missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \| PlugInstall --sync | source $MYVIMRC
+\| endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'Chiel92/vim-autoformat'
@@ -12,8 +22,6 @@ Plug 'markvincze/panda-vim'
 Plug 'psf/black', { 'branch': 'stable' }
 Plug 'scrooloose/nerdtree'
 Plug ''leshill/vim-json'
-
-
 
 call plug#end()
 
@@ -123,4 +131,4 @@ set virtualedit+=block
 
 " Keybindings
 " So we don't have to reach for escape to leave insert mode.
-inoremap jf <esc>
+inoremap jk <esc>
