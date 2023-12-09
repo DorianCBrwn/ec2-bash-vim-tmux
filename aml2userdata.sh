@@ -20,6 +20,8 @@ setup_vim () {
 
     echo "(2/4) SETTING UP VIM..."
     local DIR=/home/ec2-user
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 }
 
@@ -63,7 +65,7 @@ setup_bash () {
     bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)" --prefix=/usr/local --unattended
 
     # Change theme to powerline-multiline
-    cp /usr/local/share/oh-my-bash/bashrc home/ec2-user/.bashrc
+    cp /usr/local/share/oh-my-bash/bashrc /home/ec2-user/.bashrc
     sed -i 's/OSH_THEME=.*/OSH_THEME="powerline-multiline"/g' /home/ec2-user/.bashrc
 
 }
