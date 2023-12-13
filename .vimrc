@@ -130,6 +130,7 @@ set incsearch " live incremental searching
 set showmatch " live match highlighting
 set hlsearch " highlight matches
 set gdefault " use the `g` flag by default.
+set wildmenu
 " allow the cursor to go anywhere in visual block mode.
 set virtualedit+=block
 set laststatus=2
