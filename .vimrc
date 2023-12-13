@@ -61,13 +61,9 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 " Hybrid line numbers
-:set number relativenumber
-
-:augroup numbertoggle
-:  autocmd!
-:  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-:  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-:augroup END
+set number
+autocmd InsertEnter * :set norelativenumber
+autocmd InsertLeave * :set relativenumber
 
 " Searching within a file
 set hlsearch  " highlight search results
@@ -136,6 +132,7 @@ set hlsearch " highlight matches
 set gdefault " use the `g` flag by default.
 " allow the cursor to go anywhere in visual block mode.
 set virtualedit+=block
+set laststatus=2
 
 " Keybindings
 " So we don't have to reach for escape to leave insert mode.
