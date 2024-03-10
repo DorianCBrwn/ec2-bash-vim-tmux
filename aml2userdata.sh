@@ -8,7 +8,7 @@ get_dotfiles () {
     #Install git
     sudo yum -y install git
     local DIR=/home/ec2-user
-    git clone https://github.com/DorianCBrwn/ec2-bash-vim-tmux $DIR/dotfiles
+    git clone https://github.com/DorianCBrwn/ec2-bash-vim-tmux $DIR/.dotfiles
     ln -s $DIR/dotfiles/.tmux.conf $DIR/.tmux.conf
     ln -s $DIR/dotfiles/.vimrc $DIR/.vimrc
     ln -s $DIR/dotfiles/.trueline-settings $DIR/.trueline-settings
