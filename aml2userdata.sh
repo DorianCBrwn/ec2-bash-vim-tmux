@@ -11,7 +11,6 @@ get_dotfiles() {
   git clone https://github.com/DorianCBrwn/ec2-bash-vim-tmux $DIR/dotfiles
   ln -s $DIR/dotfiles/.tmux.conf $DIR/.tmux.conf
   ln -s $DIR/dotfiles/.vimrc $DIR/.vimrc
-  ln -s $DIR/dotfiles/.trueline-settings $DIR/.trueline-settings
   chown -R ec2-user:ec2-user $DIR/dotfiles $DIR/.vimrc $DIR/.tmux.conf
 
 }
